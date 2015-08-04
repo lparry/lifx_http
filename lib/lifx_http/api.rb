@@ -11,20 +11,19 @@ module LifxHttp
 
       def set_color(selector, color, options = { duration: 2.0,
                                                  power_on: true})
-        HTTParty.put(color_url(selector),
+        response = HTTParty.put(color_url(selector),
                      headers: authorization_headers,
                      query: options.merge({
                        color: color
-                     })).tap do |response|
-      if response.success?
-        puts "info: set #{selector} to #{color}" if ENV["DEBUG"]
-        puts response.to_s if ENV["DEBUG"]
-        nil
-      else
-        puts "warning: light status - #{response}"
-        -1
-      end
-                     end
+                     }))
+        if response.success?
+          puts "info: set #{selector} to #{color}" if ENV["DEBUG"]
+          puts response.to_s if ENV["DEBUG"]
+          nil
+        else
+          puts "warning: light status - #{response}"
+          -1
+        end
       end
 
       def get_info(selector)
