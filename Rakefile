@@ -1,10 +1,6 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
-require "lifx_toys"
-require "lifx_toys/clouds"
-require "lifx_toys/colors"
-require "lifx_toys/sunrise"
-require "lifx_toys/rainbow"
+require "lifx_http"
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
@@ -14,43 +10,26 @@ end
 
 task :default => :test
 
-
-desc 'Cloud lighting simulation on all lights'
-task :clouds do
-  LifxToys::Clouds.new.run
-end
-
-desc 'Cycle random Hue, Saturation and brightness on all lights'
-task :colors do
-  LifxToys::Colors.new.run
-end
-
-desc '30 minute sunrise, 0-15M brightness:0-100% kelvin:2500, 15-30M kelvin:2500-9000'
-task :sunrise do
-  LifxToys::Sunrise.new.run
-end
-
-desc 'slow rainbow'
-task :rainbow do
-  LifxToys::Rainbow.new.run
-end
-
+desc "display all light info"
 task :info do
   puts all_lights.get_info
 end
 
+desc "Turn all lights off"
 task :off do
   puts all_lights.set_power_state 'off'
 end
 
+desc "Turn all lights on"
 task :on do
   puts all_lights.set_power_state 'on'
 end
 
+desc "Toggle all lights"
 task :toggle do
   puts all_lights.toggle
 end
 
 def all_lights
-  LifxToys::HttpApi.with_default_selector('all')
+  LifxHttp::Api.with_default_selector('all')
 end

@@ -1,8 +1,8 @@
 require 'httparty'
-require_relative 'http_api/with_default_selector'
+require_relative 'api/with_default_selector'
 
-module LifxToys
-  module HttpApi
+module LifxHttp
+  module Api
     class << self
 
       def with_default_selector(selector)

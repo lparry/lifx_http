@@ -1,7 +1,7 @@
-require_relative '../http_api'
+require_relative '../api'
 
-module LifxToys
-  module HttpApi
+module LifxHttp
+  module Api
 
     class WithDefaultSelector
 
@@ -14,15 +14,15 @@ module LifxToys
       private
 
       def method_missing(method_name, *args)
-        if ::LifxToys::HttpApi.respond_to? method_name
-          ::LifxToys::HttpApi.public_send(method_name, selector, *args)
+        if ::LifxHttp::Api.respond_to? method_name
+          ::LifxHttp::Api.public_send(method_name, selector, *args)
         else
           raise
         end
       end
 
       def make_request(method_name, *args)
-        HttpApi.public_send(method_name, selector, *args)
+        Api.public_send(method_name, selector, *args)
       end
     end
 

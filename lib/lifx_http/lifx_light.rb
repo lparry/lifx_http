@@ -1,7 +1,7 @@
 require 'forwardable'
-require_relative 'http_api'
+require_relative 'api'
 
-module LifxToys
+module LifxHttp
   class LifxLight
 
     extend Forwardable
@@ -11,7 +11,7 @@ module LifxToys
     attr_reader :light_id
 
     def self.get_lights
-      @lights ||= HttpApi.with_default_selector("all").get_info.map do |data|
+      @lights ||= Api.with_default_selector("all").get_info.map do |data|
         LifxLight.new(data)
       end
     end
@@ -20,7 +20,7 @@ module LifxToys
       @light_id = data["id"]
       @data = OpenStruct.new(data)
       @updated_at = Time.now
-      @http_api = HttpApi.with_default_selector(selector)
+      @http_api = Api.with_default_selector(selector)
     end
 
     def update_info

@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'lifx_toys/version'
+require 'lifx_http/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "lifx_toys"
-  spec.version       = LifxToys::VERSION
+  spec.name          = "lifx_http"
+  spec.version       = LifxHttp::VERSION
   spec.authors       = ["Lucas Parry"]
   spec.email         = ["lparry@gmail.com"]
 
-  spec.summary       = %q{Lucas's LIFX toys}
-  spec.description   = %q{ruby wrapper and toys for the LIFX cloud api}
-  spec.homepage      = "https://github.com/lparry/lifx_toys"
+  spec.summary       = %q{Lucas's LIFX HTTP API gem}
+  spec.description   = %q{ruby wrapper for the LIFX cloud api}
+  spec.homepage      = "https://github.com/lparry/lifx_http"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
